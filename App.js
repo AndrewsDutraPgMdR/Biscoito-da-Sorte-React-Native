@@ -1,7 +1,19 @@
 import React, {Component} from 'react';
-import {View,Text, Image} from 'react-native';
+import {View,Text, Button} from 'react-native';
 
 class App extends Component{
+  constructor (props){
+    super(props)
+    this.state = {
+      nome: "Andrews"
+    };
+    this.entrar = this.entrar.bind(this);
+  }
+  entrar(nome){
+    this.setState({
+      nome: nome
+    })
+  }
   render(){
 
     let nome = 'Andrews';
@@ -9,32 +21,17 @@ class App extends Component{
 
 
     return(
-      <View>
-        <Text> Ola mundo </Text>
-        <Text> Meu primeiro APP </Text>
-        <Text style={{color:'red',fontSize:24,margin:15}}> 
-          Sujeito Programador
+      <View style={{marginTop: 50}}>
+        <Button title="Entrar" onPress={() => this.entrar('Algum texto')}/>
+        <Text style={{fontSize:23,color:'red',textAlign:'center'}}>
+           {this.state.nome}
         </Text>
-        <Text style={{fontSize: 30}}> {nome} </Text>
-        <Jobs largura={500} altura={500} nome="SteveeeJob"/>
+        
       </View>
     );
   }
 }
 
-class Jobs extends Component{
-  render(){
-    let img = 'https://sujeitoprogramador.com/steve.png'
-    return(
-      <View>
-        <Image 
-          source={{uri: img}}
-          style={{width:this.props.largura,height:this.props.altura}}
-        />
-        <Text> {this.props.nome} </Text>
-      </View>
-    );
-  }
-}
+
 
 export default App;
