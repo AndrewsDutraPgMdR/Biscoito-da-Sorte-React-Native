@@ -1,23 +1,25 @@
 import React, {Component} from 'react';
-import {View,Text, StyleSheet,TextInput} from 'react-native';
+import {View,Text, StyleSheet,TextInput,Button} from 'react-native';
 
 class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      nome: '' 
+      nome: '' ,
+      input: ''
     };
 
-    this.peganome = this.peganome.bind(this);
+
+    this.entrar = this.entrar.bind(this);
   }
-  peganome(texto){
-    if (texto.length > 0){
-      this.setState({nome:'Bem vindo '+texto});
-    }else{
-      this.setState({nome:''});
+  entrar(){
+    if (this.state.input === ''){
+      alert("Digite seu nome! ")
+      return;
     }
-    
+    this.setState({nome:'Bem vindo '+this.state.input})
   }
+  
 
   render(){
     return(
@@ -26,9 +28,9 @@ class App extends Component{
         style={styles.input}
         placeholder='Digite seu nome'
         underlineColorAndroid="transparent"
-        onChangeText={this.peganome}
+        onChangeText={(texto)=>this.setState({input:texto})}
         />
-
+        <Button title="Entrar" onPress={this.entrar}/>
         <Text style={styles.texto}> {this.state.nome}</Text>
       </View>
     );
@@ -36,7 +38,8 @@ class App extends Component{
 }
 const styles = StyleSheet.create({
   container:{
-    flex:1
+    flex:1,
+    justifyContent:'center'
   },
   input:{
     height: 60,
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
     borderColor: '#222',
     margin:10,
     fontSize:20,
-    padding:20
+    
   },
   texto:{
     textAlign:'center',
